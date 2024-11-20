@@ -51,7 +51,6 @@ def main():
             edge_data = graph[route[i]][route[i + 1]]
             print(f"{route[i]} -> {route[i + 1]}: Time = {edge_data['time']:.2f} minutes, Cost = {edge_data['cost']:.2f} units")
 
-
         # Calculate total weight (time or cost)
         total_weight = sum(
             graph[route[i]][route[i + 1]][criteria]
@@ -64,8 +63,12 @@ def main():
         else:
             print(f"Total cost: {total_weight:.2f} units")
 
+        # Visualize the graph and the optimal route
+        draw_graph(graph, route)
+
     except Exception as e:
         print(f"Error: {e}")
+
 
 if __name__ == "__main__":
     main()

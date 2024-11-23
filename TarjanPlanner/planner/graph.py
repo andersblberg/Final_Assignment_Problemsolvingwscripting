@@ -1,34 +1,28 @@
-def build_graph(relatives, transport_modes):
-    import networkx as nx
-    from geopy.distance import geodesic
+import networkx as nx
+from geopy.distance import geodesic
 
-    G = nx.Graph()
+def build_graph(relatives):
+    """Build a graph with distances between relatives."""
+    graph = nx.Graph()
 
-    # Add nodes
+    # Add nodes with positions
     for relative in relatives:
-        G.add_node(relative["name"], pos=(relative["lat"], relative["lon"]))
+        graph.add_node(
+            relative["name"],
+            pos=(relative["lon"], relative["lat"])  # Using corrected `lon` and `lat` fields
+        )
 
-    # Add edges with weights
+    # Add edges with geodesic distances
     for i, relative1 in enumerate(relatives):
-        for relative2 in relatives[i+1:]:
-            # Calculate distance between nodes
-            distance_km = geodesic(
-                (relative1["lat"], relative1["lon"]),
-                (relative2["lat"], relative2["lon"])
-            ).km
+        for j, relative2 in enumerate(relatives):
+            if i < j:
+                pos1 = (relative1["lat"], relative1["lon"])
+                pos2 = (relative2["lat"], relative2["lon"])
+                distance_km = geodesic(pos1, pos2).kilometers
+                graph.add_edge(
+                    relative1["name"],
+                    relative2["name"],
+                    distance=distance_km
+                )
 
-            # Calculate weights for each transport mode
-            for mode in transport_modes:
-                travel_time = (distance_km / mode["speed_kmh"]) * 60  # Time in minutes
-                cost = distance_km * mode["cost_per_km"]
-
-                # Add edge with weights for "time" and "cost"
-                if not G.has_edge(relative1["name"], relative2["name"]):
-                    G.add_edge(
-                        relative1["name"],
-                        relative2["name"],
-                        time=travel_time,
-                        cost=cost
-                    )
-
-    return G
+    return graph

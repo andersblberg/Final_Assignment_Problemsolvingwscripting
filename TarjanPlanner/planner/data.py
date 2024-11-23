@@ -9,4 +9,5 @@ relatives = [
     {"name": "Relative_8", "street": "Bukhan-ro", "district": "Jongno-gu", "lat": 37.5800, "lon": 126.9844},
     {"name": "Relative_9", "street": "Samseong-ro", "district": "Gangnam-gu", "lat": 37.5110, "lon": 127.0590},
     {"name": "Relative_10", "street": "Jamsil-ro", "district": "Songpa-gu", "lat": 37.5133, "lon": 127.1028},
+    {"name": "Tarjan's Home", "street": "Home Base", "district": "Yeouido", "lat": 37.5, "lon": 126.96},  # Reference point
 ]

@@ -1,10 +1,9 @@
 from planner.data import relatives
 from planner.graph import build_graph
-from planner.optimizer import find_optimal_route
+from planner.optimizer import calculate_edge_weights, find_optimal_route
 from planner.visualizer import draw_graph
 
 
-# Define transport modes
 transport_modes = [
     {"mode": "Bus", "speed_kmh": 40, "cost_per_km": 2, "transfer_time_min": 5},
     {"mode": "Train", "speed_kmh": 80, "cost_per_km": 5, "transfer_time_min": 2},
@@ -13,62 +12,42 @@ transport_modes = [
 ]
 
 def main():
-    # Build the graph
-    graph = build_graph(relatives, transport_modes)
+    graph = build_graph(relatives)
+    calculate_edge_weights(graph, transport_modes)
 
-    # Display available locations
-    print("Available locations:")
-    for relative in relatives:
-        print(f"- {relative['name']} ({relative['street']})")
-
-    # Get user inputs
-    start = input("\nEnter the starting location (e.g., Relative_1): ").strip()
-    end = input("Enter the ending location (e.g., Relative_10): ").strip()
-    criteria = input("Optimize by (time/cost): ").strip().lower()
-
-    # Validate inputs
-    if start not in graph:
-        print(f"Error: '{start}' is not a valid location.")
+    criteria = input("Optimize by (time/cost/both): ").strip().lower()
+    if criteria not in ["time", "cost", "both"]:
+        print("Error: Invalid criteria. Choose 'time', 'cost', or 'both'.")
         return
-    if end not in graph:
-        print(f"Error: '{end}' is not a valid location.")
-        return
-    if criteria not in ["time", "cost"]:
-        print("Error: Invalid criteria. Please choose 'time' or 'cost'.")
-        return
-
-    # Debugging: Print edges with weights
-    print("\nGraph edges with weights:")
-    for edge in graph.edges(data=True):
-        print(edge)
 
     # Find the optimal route
-    try:
-        route = find_optimal_route(graph, start, end, criteria)
+    route = find_optimal_route(graph, "Tarjan's Home", criteria)
 
-        print("\nOptimal route details:")
-        for i in range(len(route) - 1):
-            edge_data = graph[route[i]][route[i + 1]]
-            print(f"{route[i]} -> {route[i + 1]}: Time = {edge_data['time']:.2f} minutes, Cost = {edge_data['cost']:.2f} units")
+    # Calculate total time and cost
+    total_time = 0
+    total_cost = 0
 
-        # Calculate total weight (time or cost)
-        total_weight = sum(
-            graph[route[i]][route[i + 1]][criteria]
-            for i in range(len(route) - 1)
-        )
+    print("\nOptimal route details:")
+    for i in range(len(route) - 1):
+        u = route[i]
+        v = route[i + 1]
+        edge_data = graph[u][v]
+        mode_key = f"{criteria}_mode"
+        mode = edge_data[mode_key]
+        # Find time and cost for this mode
+        for mode_data in edge_data["modes"]:
+            if mode_data["mode"] == mode:
+                time = mode_data["time"]
+                cost = mode_data["cost"]
+                break
+        total_time += time
+        total_cost += cost
+        print(f"{u} -> {v}: Mode = {mode}, Time = {time:.2f} minutes, Cost = ₩{cost:.2f}")
 
-        print("\nOptimal route:", route)
-        if criteria == "time":
-            print(f"Total time: {total_weight:.2f} minutes")
-        else:
-            print(f"Total cost: {total_weight:.2f} units")
+    print(f"\nTotal time: {total_time:.2f} minutes")
+    print(f"Total cost: ₩{total_cost:.2f}")
 
-        # Visualize the graph and the optimal route
-        draw_graph(graph, route)
-
-    except Exception as e:
-        print(f"Error: {e}")
-
+    draw_graph(graph, route, criteria)
 
 if __name__ == "__main__":
     main()

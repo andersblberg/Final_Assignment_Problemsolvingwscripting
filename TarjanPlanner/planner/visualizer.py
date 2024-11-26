@@ -21,7 +21,7 @@ def draw_graph(graph, route, criteria):
     nx.draw_networkx_nodes(
         graph, pos,
         nodelist=[node for node in graph.nodes if node != "Tarjan's Home"],
-        node_size=500, node_color='lightblue', label="Relatives (light blue circles)"
+        node_size=250, node_color='lightblue', label="Relatives (light blue circles)"
     )
     nx.draw_networkx_nodes(
         graph, pos,
@@ -51,6 +51,16 @@ def draw_graph(graph, route, criteria):
         plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='green', markersize=10, label="Home"),
     ]
     plt.legend(handles=legend_elements, loc="upper right", fontsize="small", title="Legend")
+
+    mode_key = f"{criteria}_mode"
+    for i, (u, v) in enumerate(zip(route[:-1], route[1:])):
+        edge_data = graph[u][v]
+        mode = edge_data[mode_key]
+        nx.draw_networkx_edges(
+            graph, pos, edgelist=[(u, v)],
+            edge_color=edge_colors[mode],
+            width=2.5
+        )
 
     # Add axes labels and a title
     plt.xlabel("Longitude")

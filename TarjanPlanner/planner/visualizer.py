@@ -21,7 +21,7 @@ def draw_graph(graph, route, criteria):
     nx.draw_networkx_nodes(
         graph, pos,
         nodelist=[node for node in graph.nodes if node != "Tarjan's Home"],
-        node_size=250, node_color='lightblue', label="Relatives (light blue circles)"
+        node_size=200, node_color='lightblue', label="Relatives (light blue circles)"
     )
     nx.draw_networkx_nodes(
         graph, pos,

@@ -25,7 +25,7 @@ def calculate_edge_weights(graph, transport_modes):
     mean_cost = sum(all_costs) / len(all_costs) if sum(all_costs) > 0 else 1  # Avoid division by zero
 
     # Set adjustment factor to increase cost influence
-    adjustment_factor = 0.15 # You can experiment with this value
+    adjustment_factor = 0.2 # You can experiment with this value
 
     # Compute scaling factor with adjustment
     scaling_factor = (mean_time / mean_cost) * adjustment_factor

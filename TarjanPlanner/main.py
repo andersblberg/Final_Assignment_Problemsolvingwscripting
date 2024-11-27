@@ -26,12 +26,15 @@ def main():
     # Calculate total time and cost
     total_time = 0
     total_cost = 0
+    total_distance = 0
 
     print("\nOptimal route details:")
     for i in range(len(route) - 1):
         u = route[i]
         v = route[i + 1]
         edge_data = graph[u][v]
+        distance = edge_data["distance"]  # Retrieve the distance
+        total_distance += distance        # Add to total distance
         mode_key = f"{criteria}_mode"
         mode = edge_data[mode_key]
         # Find time and cost for this mode
@@ -42,8 +45,9 @@ def main():
                 break
         total_time += time
         total_cost += cost
-        print(f"{u} -> {v}: Mode = {mode}, Time = {time:.2f} minutes, Cost = ₩{cost:.2f}")
+        print(f"{u} -> {v}: Distance = {distance:.2f} km, Mode = {mode}, Time = {time:.2f} minutes, Cost = ₩{cost:.2f}")
 
+    print(f"\nTotal distance: {total_distance:.2f} km")
     print(f"\nTotal time: {total_time:.2f} minutes")
     print(f"Total cost: ₩{total_cost:.2f}")
 

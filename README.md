@@ -4,7 +4,7 @@
 ![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 ![Pytest](https://img.shields.io/badge/pytest-8.3.4-brightgreen.svg)
 
-TarjanPlanner is a Python-based application designed to optimize multi-destination routes for individuals seeking to visit all their relatives efficiently. By leveraging various transportation modes—bus, train, bicycle, and walking—the program calculates the most optimal path based on user-selected criteria: minimizing time, minimizing cost, or balancing both.
+TarjanPlanner is a Python-based application designed to optimize multi-destination routes for an individual named Tarjan, seeking to visit all his relatives efficiently. By leveraging various transportation modes—bus, train, bicycle, and walking—the program calculates the most optimal path based on user-selected criteria: minimizing time, minimizing cost, or balancing both.
 
 ## Table of Contents
 

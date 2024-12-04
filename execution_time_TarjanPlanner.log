@@ -1,0 +1,15 @@
+2024-12-03 15:48:38,386 - INFO - Function 'build_the_graph' executed in 0.0068 seconds.
+2024-12-03 15:48:38,387 - INFO - Function 'calculate_weights' executed in 0.0003 seconds.
+2024-12-03 15:48:38,387 - INFO - Function 'find_route' executed in 0.0000 seconds.
+2024-12-03 15:48:38,392 - INFO - Function 'compute_totals_and_print' executed in 0.0045 seconds.
+2024-12-03 15:48:38,392 - INFO - Total execution time: 0.0117 seconds.
+2024-12-03 15:51:30,878 - INFO - Function 'build_the_graph' executed in 0.0070 seconds.
+2024-12-03 15:51:30,878 - INFO - Function 'calculate_weights' executed in 0.0003 seconds.
+2024-12-03 15:51:30,885 - INFO - Function 'find_route' executed in 0.0001 seconds.
+2024-12-03 15:51:30,889 - INFO - Function 'compute_totals_and_print' executed in 0.0048 seconds.
+2024-12-03 15:51:30,890 - INFO - Total execution time: 0.0121 seconds.
+2024-12-05 00:43:47,227 - INFO - Function 'build_the_graph' executed in 0.0070 seconds.
+2024-12-05 00:43:47,228 - INFO - Function 'calculate_weights' executed in 0.0003 seconds.
+2024-12-05 00:43:47,228 - INFO - Function 'find_route' executed in 0.0001 seconds.
+2024-12-05 00:43:47,230 - INFO - Function 'compute_totals_and_print' executed in 0.0023 seconds.
+2024-12-05 00:43:47,230 - INFO - Total execution time: 0.0097 seconds.

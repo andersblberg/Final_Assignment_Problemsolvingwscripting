@@ -4,7 +4,7 @@ import logging
 
 # Configure logging
 logging.basicConfig(
-    filename='execution_time.log',
+    filename='execution_time_TarjanPlanner.log',
     filemode='a',  # Append mode
     format='%(asctime)s - %(levelname)s - %(message)s',
     level=logging.INFO

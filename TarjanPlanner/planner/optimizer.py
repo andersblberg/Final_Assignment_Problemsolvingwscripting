@@ -60,6 +60,8 @@ def calculate_edge_weights(graph, transport_modes):
 
 def find_optimal_route(graph, start, criteria):
     """Find the optimal route visiting all nodes and returning to start."""
+    if criteria not in ["time", "cost", "both"]:
+        raise ValueError(f"Invalid criteria: {criteria}")
     nodes = list(graph.nodes())
     nodes.remove(start)
     route = [start]
